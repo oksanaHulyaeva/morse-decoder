@@ -36,10 +36,39 @@ const MORSE_TABLE = {
     '----.':  '9',
     '-----':  '0',
 };
+const obj = {
+	'10': '.',
+	'11': '-',
+};
 
-function decode(expr) {
-    // write your solution here
-}
+ function decode(expr) {
+        let arr = expr.match(/(.{1,10})/gim);
+
+        let newArr = arr.map(function(item){
+            if(item === '**********') return item = [' '];
+            else {
+                let str = String(item = +item);
+                return str.match(/(.{1,2})/gim);
+            }
+        })
+    
+        newArr = newArr.map(function(item){
+            let arr1 = item.map(function(str){
+                if(str != ' ') return obj[str];
+                else return str;
+            })
+            return arr1.join('');
+        })
+        
+        newArr = newArr.map(function(item){
+            if(item != ' ') return MORSE_TABLE[item];
+            else return ' ';
+        })
+
+        
+        return newArr.join('');
+    } 
+
 
 module.exports = {
     decode
